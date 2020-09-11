@@ -1,0 +1,119 @@
+{
+  "simulation": {
+    "collectFullData" : true,
+    "maxRuns"         : 10000,
+    "numericalMethod" : "Events",
+    "terminatePrimaryInfected" : true,
+    "dt": "6*s"
+  },
+  "person": {
+    "physiology": {
+      "breathingRate": "10*L/min",
+      "breathingEfficiency": 0.5,
+      "maxviralload": "7.5e5/ml",
+      "minviralload": "1e-10/ml",
+      "hand": {
+        "surfaceArea": "2*cm**2",
+        "decayRate": "0.115/h"
+      },
+      "incubation": {
+        "name": "lognormal",
+        "params": {
+          "mean": "4.9*d",
+          "std": 0.55
+        }
+      },
+      "sickness": {
+        "period": "20*d"
+      }
+    },
+    "actions": {
+      "immuneSystem": {
+        "frequency": "0.14/h",
+        "doseresponse": {
+          "name": "exp",
+          "params": {
+            "k": 410
+          }
+        }
+      },
+      "cough": {
+        "dropletModel": "Duguid",
+        "viralLoadFactor" : 1,
+        "frequency": {
+          "Susceptible": "10/d",
+          "Exposed": "10/d",
+          "Infection": "100/d",
+          "Recovered": "10/d"
+        },
+        "stainArea": "3.5*m**2"
+      },
+      "sneeze": {
+        "dropletModel": "Duguid",
+        "viralLoadFactor" : 1,
+        "frequency": {
+          "Susceptible": "4/d",
+          "Exposed": "4/d",
+          "Infection": "4/d",
+          "Recovered": "4/d"
+        }
+      },
+      "talk": {
+        "dropletModel": "Duguid",
+        "viralLoadFactor" : 1,
+        "frequency": {
+          "Susceptible": "4/h",
+          "Exposed": "4/h",
+          "Infection": "4/h",
+          "Recovered": "4/h"
+        }
+      },
+      "touchFace": {
+        "frequency": "16/h",
+        "factorHandToFace": 0.35,
+        "handToMouth": 0.5,
+        "autoincolationVolume": "2e-3*ml"
+      },
+      "touchSurface": {
+        "frequency": "1/min",
+        "factorSurfaceToHand": 0.24,
+        "factorHandToSurface": 0.05
+      },
+      "touchFomite": {
+        "frequency": "60/d"
+      },
+      "washHands": {
+        "frequency": "3/d",
+        "efficiency": 1
+      }
+    }
+  },
+  "room" : {
+    "physical": {
+      "surfaceArea": "100*m**2",
+      "height": "3*m",
+      "furnitureSurfaceAreaFactor": 1.8
+    },
+    "air": {
+      "decayRate": "0.7/h",
+      "exchangeRate": "0.3/h"
+    },
+    "surface": {
+      "decayRate": "0.115/h"
+    },
+    "fomite": {
+      "surfaceArea": "13.3333*cm**2",
+      "decayRate": "0.115/h"
+    },
+    "actions": {
+      "cleanFomite": {
+        "frequency": "2/d",
+        "efficiency": 1
+      },
+      "social": {
+        "frequency": "3/d"
+      }
+    }
+  }
+}
+
